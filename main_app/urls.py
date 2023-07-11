@@ -14,6 +14,8 @@ urlpatterns = [
     path('exercises/<int:pk>/update/', views.ExerciseUpdate.as_view(), name='exercises_update'),
     path('exercises/<int:pk>/delete/', views.ExerciseDelete.as_view(), name='exercises_delete'),
     #API
-    # path('exercises/search', include('rest_framework.urls')),
     path('exercises/search', views.exercise_searches, name='exercises_searches'),
+    #Workouts
+    path('workout/<int:workout_id>/', views.workout_detail, name='workout_detail'),
+
 ]

@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Exercise
+from .models import Exercise, Workout
 from django.http import HttpResponse
 import requests, os
 
@@ -54,4 +54,8 @@ def exercise_searches(request):
             print("Error:", response.status_code, response.text)
         
     return render(request, "exercise_searches.html")
+
+def workout_detail(request, workout_id):
+    workout = get_object_or_404(Workout, id=workout_id)
+    return render(request, 'workout_detail.html', {'workout': workout})
 
