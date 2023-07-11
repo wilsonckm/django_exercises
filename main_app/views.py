@@ -59,3 +59,9 @@ def workout_detail(request, workout_id):
     workout = get_object_or_404(Workout, id=workout_id)
     return render(request, 'workout_detail.html', {'workout': workout})
 
+def workouts_index(request):
+    workouts = Workout.objects.all()
+    return render(request, 'workouts/index.html', {
+        'workouts': workouts
+    })
+
