@@ -9,6 +9,8 @@
   <title>Exercises</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
   <header class="navbar-fixed">
@@ -21,6 +23,7 @@
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'exercises_create' %}">Add New Exercise</a></li>
           <li><a href="{% url 'index' %}">View All My Exercises</a></li>
+          <li><a href="{% url 'exercises_searches' %}">Search For Exercises</a></li>
         </ul>
       </div>
     </nav>

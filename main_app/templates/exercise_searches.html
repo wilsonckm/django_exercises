@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Exercise Search</h1>
+
+<form method="post" action="{% url 'exercises_searches'%}">
+  {% csrf_token %}
+  <label>Select Muscle:</label>
+    <select class="browser-default" name = "muscle">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="Abdominals">Abdominals</option>
+      <option value="Abductors">Abductors</option>
+      <option value="Adductors">Adductors</option>
+      <option value="Biceps">Biceps</option>
+      <option value="Calves">Calves</option>
+      <option value="Chest">Chest</option>
+      <option value="Forearms">Forearms</option>
+      <option value="Glutes">Glutes</option>
+      <option value="Hamstrings">Hamstrings</option>
+      <option value="Lats">Lats</option>
+      <option value="Lower_Back">Lower Back</option>
+      <option value="Middle_Back">Middle Back</option>
+      <option value="Neck">Neck</option>
+      <option value="Quadriceps">Quads</option>
+      <option value="Traps">Traps</option>
+      <option value="Triceps">Triceps</option>
+    </select>
+  <input type="hidden" name="exercise_name" value="{{ exercise.name }}">
+  <button type="submit">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Muscle</th>
+            <th>Difficulty</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exercise_search in exercise_searches %}
+        <tr>
+            <td>{{ exercise_search.name }}</td>
+            <td>{{ exercise_search.type }}</td>
+            <td>{{ exercise_search.muscle }}</td>
+            <td>{{ exercise_search.difficulty }}</td>
+        </tr>
+        {% endfor %}    
+    </tbody>
+</table>
+        
+{% endblock %}

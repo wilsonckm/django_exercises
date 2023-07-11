@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Exercise
+from django.http import HttpResponse
+import requests, os
+
+api_key = os.environ.get('API_KEY')
 
 def home(request):
     return render(request, 'home.html')
@@ -33,3 +37,21 @@ class ExerciseDelete(DeleteView):
     success_url='/exercises'
 
 # Create your views here.
+
+def exercise_searches(request):
+    if request.method == 'POST':
+        muscle = request.POST.get('muscle', '')  # Get the selected muscle from the POST data
+        api_url = f'https://api.api-ninjas.com/v1/exercises?muscle={muscle}'
+        # print(request.POST)
+        # print(api_url)
+        # print(muscle)
+        response = requests.get(api_url, headers={'X-Api-Key': api_key })
+        if response.status_code == requests.codes.ok:
+            exercise_searches = response.json()
+            print(muscle)
+            return render(request, "exercise_searches.html", {'exercise_searches': exercise_searches})
+        else:
+            print("Error:", response.status_code, response.text)
+        
+    return render(request, "exercise_searches.html")
+
